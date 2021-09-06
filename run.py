@@ -33,10 +33,26 @@ def ask_survey_questions():
     questions_row = survey_data[0]
     for int in range(len(questions_row)):
         print(questions_row[int] + "? ")
-        question_answer = input("Answer:\n ")
+        question_answer = input("Answer: ")
     
 
-    
+def main():   
+    while True: 
+        print("Welcome to our survey")
+        print("Please select one of the following options:\n")
+        print("1-Complete survey")
+        print("2-View all survey results")
+        print("3 View survey results per gender")
+        print("4 View survey results per age group")
+        print("5 Exit\n")
+        menu_selection = input("What is your choice?:")
+        
+        if (menu_selection == "1"):
+            ask_survey_questions()
+        if (menu_selection == "2"):
+            get_survey_data()
+        if (menu_selection == "5"):
+            print("Thank you!")
+            break
 
-#get_survey_data()
-ask_survey_questions()
+main()
