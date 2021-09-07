@@ -1,5 +1,6 @@
 import gspread
 from google.oauth2.service_account import Credentials
+import os
 
 SCOPE = [
     "https://www.googleapis.com/auth/spreadsheets",
@@ -34,11 +35,18 @@ def ask_survey_questions():
     for int in range(len(questions_row)):
         print(questions_row[int] + "? ")
         question_answer = input("Answer: ")
-    
+def clearConsole():
+    command = 'clear'
+    if os.name in ('nt', 'dos'): 
+        command = 'cls'
+    os.system(command)
 
 def main():   
+    """
+    This is the main function from which all other function will be called.
+    Initialy the main function will display the menu to the user
+    """
     while True: 
-        print("Welcome to our survey")
         print("Please select one of the following options:\n")
         print("1-Complete survey")
         print("2-View all survey results")
@@ -48,11 +56,14 @@ def main():
         menu_selection = input("What is your choice?:")
         
         if (menu_selection == "1"):
+            clearConsole()
             ask_survey_questions()
+            clearConsole()
         if (menu_selection == "2"):
             get_survey_data()
         if (menu_selection == "5"):
             print("Thank you!")
             break
 
+print("Welcome to our survey\n")
 main()
