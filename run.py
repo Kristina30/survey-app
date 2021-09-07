@@ -29,13 +29,31 @@ def ask_survey_questions():
     """
     This method gets the questions from the sruvey spread sheet
     """
-
+    survey_answers = []
     survey_data = SHEET.worksheet("survey_data").get_all_values()
     questions_row = survey_data[0]
     for int in range(len(questions_row)):
         print(questions_row[int] + "? ")
         question_answer = input("Answer: ")
+        survey_answers.append(question_answer)
+    return survey_answers
+
+def save_survey_data(survey_data):
+    """
+    This function will accept as paramater an array of survey answers.
+    It will save the data to the servey spreadsheet
+    """
+    print(f"Updating survey worksheet...\n")
+
+    worksheet_to_update = SHEET.worksheet("survey_data")
+    worksheet_to_update.append_row(survey_data)
+    print(f"Survey worksheet updated.\n")
+
+
 def clearConsole():
+    """
+    This method will be used to clear the console for the user
+    """
     command = 'clear'
     if os.name in ('nt', 'dos'): 
         command = 'cls'
@@ -57,7 +75,8 @@ def main():
         
         if (menu_selection == "1"):
             clearConsole()
-            ask_survey_questions()
+            new_survey_row = ask_survey_questions()
+            save_survey_data(new_survey_row)
             clearConsole()
         if (menu_selection == "2"):
             get_survey_data()
