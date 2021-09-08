@@ -9,11 +9,11 @@ SCOPE = [
     ]
 
 
-
 CREDS = Credentials.from_service_account_file('CREDS.json')
 SCOPED_CREDS = CREDS.with_scopes(SCOPE)
 GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SHEET = GSPREAD_CLIENT.open('Survey')
+
 
 def get_survey_data():
     """
@@ -21,12 +21,13 @@ def get_survey_data():
     """
 
     survey_data = SHEET.worksheet("survey_data").get_all_values()
-    count = 0    
+    count = 0
     for survey_row in survey_data:
-        count = count +1 
+        count = count + 1
         if (count != 2):
             print(survey_row)
     print("\n\n")
+
 
 def ask_survey_questions():
     """
@@ -36,16 +37,17 @@ def ask_survey_questions():
     survey_data = SHEET.worksheet("survey_data").get_all_values()
 
     questions_row = survey_data[0]
-    data_types =  survey_data[1]
-  
+    data_types = survey_data[1]
+
     for int in range(len(questions_row)):
         while True:
             print(questions_row[int] + "? (type: " + data_types[int] + ")")
             question_answer = input("Answer: ")
-            if validate_data(question_answer,data_types[int]):
+            if validate_data(question_answer, data_types[int]):
                 break
         survey_answers.append(question_answer)
     return survey_answers
+
 
 def validate_data(value, data_type):
     """
@@ -54,22 +56,22 @@ def validate_data(value, data_type):
     try:
         result = False
         if (data_type == "text"):
-            if (len(value)>0):
-                result =  True
+            if (len(value) > 0):
+                result = True
         if (data_type == "number"):
             if (int(value) > 0):
-                result =  True
+                result = True
         if (len(data_type.split("/")) > 1):
             data_values = data_type.split("/")
             for str in data_values:
                 if (str.lower() == value.lower()):
                     return True
     except ValueError as e:
-        print(f"Invalid data for type {data_type}")
+        print(f"Invalid data for type {data_type} - {e}")
         return False
-    if (result == False):
+    if (result is False):
         print(f"Invalid data for type {data_type}")
-    
+
     return result
 
 
@@ -78,11 +80,11 @@ def save_survey_data(survey_data):
     This function will accept as paramater an array of survey answers.
     It will save the data to the servey spreadsheet
     """
-    print(f"Updating survey worksheet...\n")
+    print("Updating survey worksheet...\n")
 
     worksheet_to_update = SHEET.worksheet("survey_data")
     worksheet_to_update.append_row(survey_data)
-    print(f"Survey worksheet updated.\n")
+    print("Survey worksheet updated.\n")
 
 
 def clearConsole():
@@ -90,16 +92,17 @@ def clearConsole():
     This method will be used to clear the console for the user
     """
     command = 'clear'
-    if os.name in ('nt', 'dos'): 
+    if os.name in ('nt', 'dos'):
         command = 'cls'
     os.system(command)
 
-def main():   
+
+def main():
     """
     This is the main function from which all other function will be called.
     Initialy the main function will display the menu to the user
     """
-    while True: 
+    while True:
         print("Please select one of the following options:\n")
         print("1-Complete survey")
         print("2-View all survey results")
@@ -107,7 +110,7 @@ def main():
         print("4 View survey results per age group")
         print("5 Exit\n")
         menu_selection = input("What is your choice?:")
-        
+
         if (menu_selection == "1"):
             clearConsole()
             new_survey_row = ask_survey_questions()
@@ -118,6 +121,7 @@ def main():
         if (menu_selection == "5"):
             print("Thank you!")
             break
+
 
 print("Welcome to our survey\n")
 main()
