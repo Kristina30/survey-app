@@ -31,12 +31,44 @@ def ask_survey_questions():
     """
     survey_answers = []
     survey_data = SHEET.worksheet("survey_data").get_all_values()
+
     questions_row = survey_data[0]
+    data_types =  survey_data[1]
+  
     for int in range(len(questions_row)):
-        print(questions_row[int] + "? ")
-        question_answer = input("Answer: ")
+        while True:
+            print(questions_row[int] + "? Data Type: " + data_types[int])
+            question_answer = input("Answer: ")
+            if validate_data(question_answer,data_types[int]):
+                break
         survey_answers.append(question_answer)
     return survey_answers
+
+def validate_data(value, data_type):
+    """
+    This function validates the entered data based on the question data type
+    """
+    try:
+        result = False
+        if (data_type == "text"):
+            if (len(value)>0):
+                result =  True
+        if (data_type == "number"):
+            if (int(value) > 0):
+                result =  True
+        if (len(data_type.split("/")) > 1):
+            data_values = data_type.split("/")
+            for str in data_values:
+                if (str.lower() == value.lower() ):
+                    result =  True
+    except ValueError as e:
+        print(f"Invalid data for type {data_type}")
+        return False
+    if (result == False):
+        print(f"Invalid data for type {data_type}")
+    
+    return result
+
 
 def save_survey_data(survey_data):
     """
