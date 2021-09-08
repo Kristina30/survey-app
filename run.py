@@ -21,9 +21,12 @@ def get_survey_data():
     """
 
     survey_data = SHEET.worksheet("survey_data").get_all_values()
-
+    count = 0    
     for survey_row in survey_data:
-        print(survey_row)
+        count = count +1 
+        if (count != 2):
+            print(survey_row)
+    print("\n\n")
 
 def ask_survey_questions():
     """
