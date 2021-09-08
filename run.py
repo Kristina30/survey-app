@@ -27,7 +27,7 @@ def get_survey_data():
 
 def ask_survey_questions():
     """
-    This method gets the questions from the sruvey spread sheet
+    This method gets the questions and data type from the sruvey spread sheet
     """
     survey_answers = []
     survey_data = SHEET.worksheet("survey_data").get_all_values()
@@ -37,7 +37,7 @@ def ask_survey_questions():
   
     for int in range(len(questions_row)):
         while True:
-            print(questions_row[int] + "? Data Type: " + data_types[int])
+            print(questions_row[int] + "? (type: " + data_types[int] + ")")
             question_answer = input("Answer: ")
             if validate_data(question_answer,data_types[int]):
                 break
@@ -59,8 +59,8 @@ def validate_data(value, data_type):
         if (len(data_type.split("/")) > 1):
             data_values = data_type.split("/")
             for str in data_values:
-                if (str.lower() == value.lower() ):
-                    result =  True
+                if (str.lower() == value.lower()):
+                    return True
     except ValueError as e:
         print(f"Invalid data for type {data_type}")
         return False
