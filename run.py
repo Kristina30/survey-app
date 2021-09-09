@@ -134,7 +134,7 @@ def main():
             sub_menu_selection = input("Enter 1 to return to the main menu:")
             if(sub_menu_selection == "1"):
                 clearConsole()
-               
+
         if (menu_selection == "5"):
             print("Thank you!")
             break
