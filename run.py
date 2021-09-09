@@ -32,7 +32,6 @@ def get_survey_data():
             survey_data_rows.append(survey_row)
 
     print(tabulate(survey_data_rows))
-    
 
 
 def ask_survey_questions():
@@ -103,20 +102,27 @@ def clearConsole():
     os.system(command)
 
 
+def print_main_menu():
+    """
+    this functions prints the main menu
+    """
+    print("Please select one of the following options:\n")
+    print("1-Complete survey")
+    print("2-View all survey results")
+    print("3 View survey results per gender")
+    print("4 View survey results per age group")
+    print("5 Exit\n")
+    menu_selection = input("What is your choice?:")
+    return menu_selection
+
+
 def main():
     """
     This is the main function from which all other function will be called.
     Initialy the main function will display the menu to the user
     """
     while True:
-        print("Please select one of the following options:\n")
-        print("1-Complete survey")
-        print("2-View all survey results")
-        print("3 View survey results per gender")
-        print("4 View survey results per age group")
-        print("5 Exit\n")
-        menu_selection = input("What is your choice?:")
-
+        menu_selection = print_main_menu()
         if (menu_selection == "1"):
             clearConsole()
             new_survey_row = ask_survey_questions()
@@ -128,7 +134,7 @@ def main():
             sub_menu_selection = input("Enter 1 to return to the main menu:")
             if(sub_menu_selection == "1"):
                 clearConsole()
-                main()
+               
         if (menu_selection == "5"):
             print("Thank you!")
             break
