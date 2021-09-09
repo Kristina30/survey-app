@@ -32,7 +32,7 @@ def get_survey_data():
             survey_data_rows.append(survey_row)
 
     print(tabulate(survey_data_rows))
-    print("\n\n")
+    
 
 
 def ask_survey_questions():
@@ -123,7 +123,12 @@ def main():
             save_survey_data(new_survey_row)
             clearConsole()
         if (menu_selection == "2"):
+            clearConsole()
             get_survey_data()
+            sub_menu_selection = input("Enter 1 to return to the main menu:")
+            if(sub_menu_selection == "1"):
+                clearConsole()
+                main()
         if (menu_selection == "5"):
             print("Thank you!")
             break
