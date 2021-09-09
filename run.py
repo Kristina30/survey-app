@@ -1,6 +1,7 @@
 import gspread
 from google.oauth2.service_account import Credentials
 import os
+from tabulate import tabulate
 
 SCOPE = [
     "https://www.googleapis.com/auth/spreadsheets",
@@ -22,10 +23,14 @@ def get_survey_data():
 
     survey_data = SHEET.worksheet("survey_data").get_all_values()
     count = 0
+
+    survey_data_rows = []
     for survey_row in survey_data:
         count = count + 1
         if (count != 2):
-            print(survey_row)
+            survey_data_rows.append(survey_row)
+
+    print(tabulate(survey_data_rows))
     print("\n\n")
 
 
@@ -57,10 +62,10 @@ def validate_data(value, data_type):
         result = False
         if (data_type == "text"):
             if (len(value) > 0):
-                result = True
+                return True
         if (data_type == "number"):
             if (int(value) > 0):
-                result = True
+                return True
         if (len(data_type.split("/")) > 1):
             data_values = data_type.split("/")
             for str in data_values:
