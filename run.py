@@ -27,6 +27,7 @@ def get_survey_data():
     survey_data_rows = []
     for survey_row in survey_data:
         count = count + 1
+        # second row in the spreadsheet is the data type so we need to skip it
         if (count != 2):
             survey_data_rows.append(survey_row)
 
