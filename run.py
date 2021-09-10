@@ -34,6 +34,28 @@ def get_survey_data():
     print(tabulate(survey_data_rows))
 
 
+def get_survey_data_by_gender(gender):
+    """
+    This method gets data for specific gender from the Survey
+    spredsheet and display it to the user
+    """
+
+    survey_data = SHEET.worksheet("survey_data").get_all_values()
+    count = 0
+
+    survey_data_rows = []
+    for survey_row in survey_data:
+        count = count + 1
+        # second row in the spreadsheet is the data type so we need to skip it
+        if (count != 2):
+            if (count == 1):
+                survey_data_rows.append(survey_row)
+            if (survey_row[2].lower() == gender):
+                survey_data_rows.append(survey_row)
+
+    print(tabulate(survey_data_rows))
+
+
 def ask_survey_questions():
     """
     This method gets the questions and data type from the sruvey spread sheet
@@ -134,6 +156,21 @@ def main():
             sub_menu_selection = input("Enter 1 to return to the main menu:")
             if(sub_menu_selection == "1"):
                 clearConsole()
+        if (menu_selection == "3"):
+            print("Select gender F or M?")
+            sub_menu_selection = input("Gender:")
+
+            if(sub_menu_selection.lower() == "f"):
+                get_survey_data_by_gender("f")
+                sub_sub_menu_selection = input("Enter 1 to return to menu:")
+                if(sub_sub_menu_selection == "1"):
+                    clearConsole()
+
+            if(sub_menu_selection.lower() == "m"):
+                get_survey_data_by_gender("m")
+                sub_sub_menu_selection = input("Enter 1 to return to menu:")
+                if(sub_sub_menu_selection == "1"):
+                    clearConsole()
 
         if (menu_selection == "5"):
             print("Thank you!")
