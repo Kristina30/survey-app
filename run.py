@@ -56,7 +56,7 @@ def get_survey_data_by_gender(gender):
     print(tabulate(survey_data_rows))
 
 
-def get_survey_data_by_age(age_from, age_to):
+def get_survey_data_by_age(agefrom, ageto):
     """
     This method gets data for specific data based
     on the from - to age range
@@ -75,8 +75,8 @@ def get_survey_data_by_age(age_from, age_to):
 
         # second row in the spreadsheet is the data type so we need to skip it
         if (count > 2):
-            
-            if (int(survey_row[1]) >= int(age_from) and int(survey_row[1]) <= int(age_to)):
+
+            if (int(survey_row[1]) >= agefrom and int(survey_row[1]) <= ageto):
                 survey_data_rows.append(survey_row)
 
     print(tabulate(survey_data_rows))
