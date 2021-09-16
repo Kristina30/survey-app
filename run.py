@@ -178,6 +178,16 @@ def print_age_submenu():
     return menu_selection
 
 
+def print_return_to_mainmenu():
+    """
+    this function gives an option to the user
+    to return to the main menu
+    """
+    sub_sub_menu_selection = input("Enter 1 to return to menu:")
+    if(sub_sub_menu_selection == "1"):
+        clear_console()
+
+
 def main():
     """
     This is the main function from which all other function will be called.
@@ -193,36 +203,35 @@ def main():
         if (menu_selection == "2"):
             clear_console()
             get_survey_data()
-            sub_menu_selection = input("Enter 1 to return to the main menu:")
-            if(sub_menu_selection == "1"):
-                clear_console()
+            print_return_to_mainmenu()
         if (menu_selection == "3"):
             print("Select gender F or M?")
             sub_menu_selection = input("Gender:")
 
             if(sub_menu_selection.lower() == "f"):
+                clear_console()
                 get_survey_data_by_gender("f")
-                sub_sub_menu_selection = input("Enter 1 to return to menu:")
-                if(sub_sub_menu_selection == "1"):
-                    clear_console()
-
+                print_return_to_mainmenu()
             if(sub_menu_selection.lower() == "m"):
+                clear_console()
                 get_survey_data_by_gender("m")
-                sub_sub_menu_selection = input("Enter 1 to return to menu:")
-                if(sub_sub_menu_selection == "1"):
-                    clear_console()
+                print_return_to_mainmenu()
 
         if (menu_selection == "4"):
             clear_console()
             age_manu_selection = print_age_submenu()
             if (age_manu_selection == "1"):
                 get_survey_data_by_age(0, 20)
+                print_return_to_mainmenu()
             if (age_manu_selection == "2"):
                 get_survey_data_by_age(20, 40)
+                print_return_to_mainmenu()
             if (age_manu_selection == "3"):
                 get_survey_data_by_age(40, 60)
+                print_return_to_mainmenu()
             if (age_manu_selection == "4"):
                 get_survey_data_by_age(60, 150)
+                print_return_to_mainmenu()
 
             if (age_manu_selection == "5"):
                 clear_console()
