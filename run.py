@@ -2,7 +2,6 @@ import gspread
 from google.oauth2.service_account import Credentials
 import os
 from tabulate import tabulate
-import sys
 
 SCOPE = [
     "https://www.googleapis.com/auth/spreadsheets",
@@ -70,8 +69,9 @@ def get_survey_data_by_age(age_from, age_to):
     for survey_row in survey_data:
         count = count + 1
 
+        # add the first line with the questions
         if (count == 1):
-                survey_data_rows.append(survey_row)
+            survey_data_rows.append(survey_row)
 
         # second row in the spreadsheet is the data type so we need to skip it
         if (count > 2):
@@ -226,7 +226,6 @@ def main():
 
             if (age_manu_selection == "5"):
                 clear_console()
-
 
         if (menu_selection == "5"):
             print("Thank you!")
