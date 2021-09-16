@@ -2,6 +2,7 @@ import gspread
 from google.oauth2.service_account import Credentials
 import os
 from tabulate import tabulate
+import sys
 
 SCOPE = [
     "https://www.googleapis.com/auth/spreadsheets",
@@ -114,7 +115,7 @@ def save_survey_data(survey_data):
     print("Survey worksheet updated.\n")
 
 
-def clearConsole():
+def clear_console():
     """
     This method will be used to clear the console for the user
     """
@@ -146,16 +147,16 @@ def main():
     while True:
         menu_selection = print_main_menu()
         if (menu_selection == "1"):
-            clearConsole()
+            clear_console()
             new_survey_row = ask_survey_questions()
             save_survey_data(new_survey_row)
-            clearConsole()
+            clear_console()
         if (menu_selection == "2"):
-            clearConsole()
+            clear_console()
             get_survey_data()
             sub_menu_selection = input("Enter 1 to return to the main menu:")
             if(sub_menu_selection == "1"):
-                clearConsole()
+                clear_console()
         if (menu_selection == "3"):
             print("Select gender F or M?")
             sub_menu_selection = input("Gender:")
@@ -164,13 +165,13 @@ def main():
                 get_survey_data_by_gender("f")
                 sub_sub_menu_selection = input("Enter 1 to return to menu:")
                 if(sub_sub_menu_selection == "1"):
-                    clearConsole()
+                    clear_console()
 
             if(sub_menu_selection.lower() == "m"):
                 get_survey_data_by_gender("m")
                 sub_sub_menu_selection = input("Enter 1 to return to menu:")
                 if(sub_sub_menu_selection == "1"):
-                    clearConsole()
+                    clear_console()
 
         if (menu_selection == "5"):
             print("Thank you!")
