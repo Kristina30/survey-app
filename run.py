@@ -221,15 +221,19 @@ def main():
             clear_console()
             age_manu_selection = print_age_submenu()
             if (age_manu_selection == "1"):
+                clear_console()
                 get_survey_data_by_age(0, 20)
                 print_return_to_mainmenu()
             if (age_manu_selection == "2"):
+                clear_console()
                 get_survey_data_by_age(20, 40)
                 print_return_to_mainmenu()
             if (age_manu_selection == "3"):
+                clear_console()
                 get_survey_data_by_age(40, 60)
                 print_return_to_mainmenu()
             if (age_manu_selection == "4"):
+                clear_console()
                 get_survey_data_by_age(60, 150)
                 print_return_to_mainmenu()
 
