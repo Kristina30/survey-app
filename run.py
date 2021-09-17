@@ -16,6 +16,29 @@ GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SHEET = GSPREAD_CLIENT.open('Survey')
 
 
+def convert_table_layout(survey_data):
+    """
+    This function coverts the data into matrix
+    so the question will be in the first row
+    and each answer will be against the question
+    to help with visual printing of the data
+    """
+    w = len(survey_data[0])
+    h = len(survey_data)
+
+    matrix = [[0 for x in range(h)] for y in range(w)]
+    count_row = 0
+    for survey_row in survey_data:
+        count_column = 0
+        for item in survey_row:
+            matrix[count_column][count_row] = item
+            count_column = count_column + 1
+
+        count_row = count_row + 1
+
+    print(tabulate(matrix))
+
+
 def get_survey_data():
     """
     This method gets data from the Survey spredsheet and display it to the user
@@ -31,7 +54,7 @@ def get_survey_data():
         if (count != 2):
             survey_data_rows.append(survey_row)
 
-    print(tabulate(survey_data_rows))
+    convert_table_layout(survey_data_rows)
 
 
 def get_survey_data_by_gender(gender):
@@ -53,7 +76,7 @@ def get_survey_data_by_gender(gender):
             if (survey_row[2].lower() == gender):
                 survey_data_rows.append(survey_row)
 
-    print(tabulate(survey_data_rows))
+    convert_table_layout(survey_data_rows)
 
 
 def get_survey_data_by_age(agefrom, ageto):
@@ -79,7 +102,7 @@ def get_survey_data_by_age(agefrom, ageto):
             if (int(survey_row[1]) >= agefrom and int(survey_row[1]) <= ageto):
                 survey_data_rows.append(survey_row)
 
-    print(tabulate(survey_data_rows))
+    convert_table_layout(survey_data_rows)
 
 
 def ask_survey_questions():
@@ -95,7 +118,7 @@ def ask_survey_questions():
     for int in range(len(questions_row)):
         while True:
             print(questions_row[int] + "? (type: " + data_types[int] + ")")
-            question_answer = input("Answer: ")
+            question_answer = input("Answer:\n")
             if validate_data(question_answer, data_types[int]):
                 break
         survey_answers.append(question_answer)
@@ -160,7 +183,7 @@ def print_main_menu():
     print("3 - View survey results per gender")
     print("4 - View survey results per age group")
     print("5 - Exit\n")
-    menu_selection = input("What is your choice?:")
+    menu_selection = input("What is your choice?:\n")
     return menu_selection
 
 
@@ -174,7 +197,7 @@ def print_age_submenu():
     print("3 - 40 to 60")
     print("4 - Over 60")
     print("5 Back to the main menu\n")
-    menu_selection = input("What is your choice?:")
+    menu_selection = input("What is your choice?:\n")
     return menu_selection
 
 
@@ -183,7 +206,7 @@ def print_return_to_mainmenu():
     this function gives an option to the user
     to return to the main menu
     """
-    sub_sub_menu_selection = input("Enter 1 to return to menu:")
+    sub_sub_menu_selection = input("Enter 1 to return to menu:\n")
     if(sub_sub_menu_selection == "1"):
         clear_console()
 
@@ -206,7 +229,7 @@ def main():
             print_return_to_mainmenu()
         if (menu_selection == "3"):
             print("Select gender F or M?")
-            sub_menu_selection = input("Gender:")
+            sub_menu_selection = input("Gender:\n")
 
             if(sub_menu_selection.lower() == "f"):
                 clear_console()
