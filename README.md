@@ -1,7 +1,7 @@
 # Survey App
 
 ## Link to the app on Heroku
-![Here is the live version on my Survey-App](https://kristina-survey-application.herokuapp.com/)
+[Here is the live version on my Survey-App](https://kristina-survey-application.herokuapp.com/)
 
 ## Features
 The app is based on a corona virus survey questions that I have found online.
