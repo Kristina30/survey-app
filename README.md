@@ -1,31 +1,33 @@
-![CI logo](https://codeinstitute.s3.amazonaws.com/fullstack/ci_logo_small.png)
+# Survey App
 
-Welcome Kristina Borisova Hadzhieva,
+## Link to the app on Heroku
+![Survey-App](https://kristina-survey-application.herokuapp.com/)
 
-This is the Code Institute student template for deploying your third portfolio project, the Python command-line project. The last update to this file was: **August 17, 2021**
+## Features
+The app is based on a corona virus survey questions that I have found online.
+It is connected to the google sheets API and let's the user input desired
+answer, which updates the google sheet provided [Here](https://docs.google.com/spreadsheets/d/1H56-CzhiVaVck5yGSWQvKi16_GZPmLz0ulLKzqpEEqQ/edit#gid=0).
 
-## Reminders
+## Purpose
 
-* Your code must be placed in the `run.py` file
-* Your dependencies must be placed in the `requirements.txt` file
-* Do not edit any of the other files or your code may not deploy properly
+The survey application provides functionality to perform and maintain survey data.
+In the background the application is using a spread sheet in Google Drive to read and update the survey data.
+When the customer launches the application, they are presented with the following options:
+
+
+
+
+
 
 ## Creating the Heroku app
 
-When you create the app, you will need to add two buildpacks from the _Settings_ tab. The ordering is as follows:
+When I created the app, I needed to add two buildpacks from the _Settings_ tab. The ordering is as follows:
 
 1. `heroku/python`
 2. `heroku/nodejs`
 
-You must then create a _Config Var_ called `PORT`. Set this to `8000`
+I then created a _Config Var_ called `PORT`. Set this to `8000`
 
-If you have credentials, such as in the Love Sandwiches project, you must create another _Config Var_ called `CREDS` and paste the JSON into the value field.
+I have also created another _Config Var_ called `CREDS` and paste the JSON into the value field.
 
-Connect your GitHub repository and deploy as normal.
-
-## Constraints
-
-The deployment terminal is set to 80 columns by 24 rows. That means that each line of text needs to be 80 characters or less otherwise it will be wrapped onto a second line.
-
------
-Happy coding!
+Last step taken was to connect my GitHub repository and deploy as normal.
