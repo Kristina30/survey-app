@@ -10,7 +10,7 @@ answer, which updates the google sheet provided [Here](https://docs.google.com/s
 
 ## Purpose and Functionality
 The survey application provides functionality to perform and maintain survey data.
-In the background the application is using a spread sheet in Google Drive to read and update the survey data.
+In the background the application is using a spread sheet in Google Sheets to read and update the survey data.
 When the user launches the application, they are presented with the following options:
 
 ![Screen shot of the app](https://github.com/Kristina30/survey-app/blob/main/images/main-image.png)
